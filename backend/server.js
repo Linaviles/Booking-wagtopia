@@ -3,33 +3,31 @@ const cors = require("cors");
 const db = require("./database");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-
-
-app.get("/", (req, res) =>{
-    res.send("Server is running");
+// root
+app.get("/", (req, res) => {
+  res.send("Server is running!");
 });
 
-app.get("/groomers", (req, res) =>{
-    db.all("SELECT * FROM groomers", (err, rows) => {
+// get groomers
+app.get("/groomers", (req, res) => {
+  db.all("SELECT * FROM groomers", (err, rows) => {
     res.json(rows);
   });
 });
 
-app.get("/bookings", (req,res) =>{
-    res.json(bookings);
-});
+// create booking
+app.post("/bookings", (req, res) => {
+  const { parentName, dogName, service, time, groomerId } = req.body;
 
-app.post("/booking", (req,res) => {
-    const {dogName, time, groomerID} = req.body;
+  if (!parentName || !dogName || !service || !time || !groomerId) {
+    return res.status(400).json({ error: "Missing fields" });
+  }
 
-    if (!dogName || !time || !groomerID ){
-        return res.status(400).json({error: "Input required"});
-    }
-
-    db.get(
+  db.get(
     "SELECT * FROM bookings WHERE time = ? AND groomerId = ?",
     [time, groomerId],
     (err, row) => {
@@ -38,17 +36,18 @@ app.post("/booking", (req,res) => {
       }
 
       db.run(
-        "INSERT INTO bookings (dogName, time, groomerId) VALUES (?, ?, ?)",
-        [dogName, time, groomerId],
-        function (err) {
-          res.json({ success: true, id: this.lastID });
+        `INSERT INTO bookings (parentName, dogName, service, time, groomerId)
+         VALUES (?, ?, ?, ?, ?)`,
+        [parentName, dogName, service, time, groomerId],
+        function () {
+          res.json({ success: true });
         }
       );
     }
   );
-
 });
 
+// groomer schedule
 app.get("/groomers/:id/bookings", (req, res) => {
   const groomerId = req.params.id;
 
@@ -65,11 +64,6 @@ app.get("/groomers/:id/bookings", (req, res) => {
   );
 });
 
-
-app.get("/bookings", (req, res) => {
-  db.all("SELECT * FROM bookings", (err, rows) => {
-    res.json(rows);
-  });
+app.listen(3000, () => {
+  console.log("Server running on http://localhost:3000");
 });
-
-app.listen(3000, () => console.log("server running on http://localhost:3000"))

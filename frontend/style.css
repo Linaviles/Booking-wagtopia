@@ -1,17 +1,17 @@
 body {
-    font-family: serif;
-    padding: 16px;
+  font-family: Arial;
+  padding: 16px;
 }
 
 input, select, button {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
 }
 
-.card{
-    padding: 12px;
-    border: 1px solid #ccc;
-    margin: 8px 0;
-    border-radius: 8px;
+.card {
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin: 8px 0;
+  border-radius: 8px;
 }

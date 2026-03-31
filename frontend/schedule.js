@@ -38,7 +38,13 @@ async function loadSchedule(groomerId) {
 
     const time = new Date(b.time).toLocaleString();
 
-    div.textContent = `${b.dogName} — ${time}`;
+    div.innerHTML = `
+      <strong>${time}</strong><br/>
+      Parent: ${b.parentName}<br/>
+      Dog: ${b.dogName}<br/>
+      Service: ${b.service}
+    `;
+
     container.appendChild(div);
   });
 }

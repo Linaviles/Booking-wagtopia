@@ -13,7 +13,9 @@ db.serialize(() => {
   db.run(`
     CREATE TABLE IF NOT EXISTS bookings (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
+      parentName TEXT,
       dogName TEXT,
+      service TEXT,
       time TEXT,
       groomerId INTEGER,
       FOREIGN KEY (groomerId) REFERENCES groomers(id)

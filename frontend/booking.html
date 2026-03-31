@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewpoint" content="width=device-widt, initial-scale=1.0">
-        <title>Book Appointment</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    </head>    
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Appointment</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-    <body>
-        <h2>Book Appointment</h2>
+<h2>Book Appointment</h2>
 
-        <form id="bookingForm">
-            <input type="text", id="dogName", placeholder="Dog Name" required>
-            <select> id="groomer"></select>
-            <input type="datetime-local", id="time" required >
-            <button type="submit">BOOK</button>
-        </form>
-    <script src="app.js"></script>
-    </body>
-<html>
+<form id="bookingForm">
+  <input type="text" id="parentName" placeholder="Your Name" required />
+  <input type="text" id="dogName" placeholder="Dog Name" required />
+
+  <select id="service">
+    <option value="Wash">Wash</option>
+    <option value="Grooming">Grooming</option>
+  </select>
+
+  <select id="groomer"></select>
+
+  <input type="datetime-local" id="time" required />
+
+  <button type="submit">Book</button>
+</form>
+
+<script src="app.js"></script>
+</body>
+</html>
